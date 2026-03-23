@@ -5,7 +5,7 @@ import 'clsx';
 /* empty css                                     */
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import { useState, useEffect, useRef } from 'react';
-import { s as supabase } from '../chunks/supabase_DZm20HW4.mjs';
+import { s as supabase } from '../chunks/supabase_D69ZckBj.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Astro = createAstro();

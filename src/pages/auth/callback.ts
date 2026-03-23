@@ -9,12 +9,11 @@ export const GET: APIRoute = async ({ url, redirect }) => {
     return redirect(`/login?error=${encodeURIComponent(error_description || error)}`);
   }
 
+  // Pass code to client-side handler so it can exchange it using the PKCE verifier in localStorage
   if (code) {
-    // Supabase will handle the code internally
-    // Redirect to dashboard, user session should be established
-    return redirect('/dashboard');
+    return redirect(`/auth/callback-client?code=${encodeURIComponent(code)}`);
   }
 
-  // For implicit flow (hash-based tokens), redirect to a client-side handler
+  // For implicit flow (hash-based tokens)
   return redirect('/auth/callback-client');
 };

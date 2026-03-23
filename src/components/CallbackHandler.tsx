@@ -8,41 +8,34 @@ export function CallbackHandler() {
   useEffect(() => {
     const handleCallback = async () => {
       try {
-        // Get the hash from the URL
-        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
 
-        if (!hash) {
-          throw new Error('No authentication data found');
+        if (code) {
+          // PKCE flow: exchange code for session (client has the verifier in localStorage)
+          const { error } = await supabase.auth.exchangeCodeForSession(code);
+          if (error) throw error;
+        } else {
+          // Implicit flow: tokens in hash
+          const hash = window.location.hash.substring(1);
+          if (!hash) throw new Error('No authentication data found');
+          const hashParams = new URLSearchParams(hash);
+          const accessToken = hashParams.get('access_token');
+          const refreshToken = hashParams.get('refresh_token');
+          if (!accessToken) throw new Error('No access token found');
+          const { error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken || '',
+          });
+          if (error) throw error;
         }
-
-        // Parse the hash parameters
-        const params = new URLSearchParams(hash);
-        const accessToken = params.get('access_token');
-        const refreshToken = params.get('refresh_token');
-        const expiresIn = params.get('expires_in');
-
-        if (!accessToken) {
-          throw new Error('No access token found');
-        }
-
-        // Create a session with the tokens
-        await supabase.auth.setSession({
-          access_token: accessToken,
-          refresh_token: refreshToken || '',
-        });
 
         setStatus('¡Autenticación exitosa! Redirigiendo...');
-
-        // Redirect to dashboard after a short delay
-        setTimeout(() => {
-          window.location.href = '/dashboard';
-        }, 1000);
+        setTimeout(() => { window.location.href = '/dashboard'; }, 500);
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Unknown error';
         setError(message);
         setStatus('Error en la autenticación');
-
-        // Redirect to login after 2 seconds
         setTimeout(() => {
           window.location.href = `/login?error=${encodeURIComponent(message)}`;
         }, 2000);

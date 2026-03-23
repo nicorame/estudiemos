@@ -3,7 +3,7 @@ import 'piccolore';
 import { $ as $$Layout } from '../../chunks/Layout_Dc6lGpzd.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import { useState, useEffect } from 'react';
-import { s as supabase } from '../../chunks/supabase_DZm20HW4.mjs';
+import { s as supabase } from '../../chunks/supabase_D69ZckBj.mjs';
 export { renderers } from '../../renderers.mjs';
 
 function CallbackHandler() {
@@ -12,25 +12,28 @@ function CallbackHandler() {
   useEffect(() => {
     const handleCallback = async () => {
       try {
-        const hash = window.location.hash.substring(1);
-        if (!hash) {
-          throw new Error("No authentication data found");
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code");
+        if (code) {
+          const { error: error2 } = await supabase.auth.exchangeCodeForSession(code);
+          if (error2) throw error2;
+        } else {
+          const hash = window.location.hash.substring(1);
+          if (!hash) throw new Error("No authentication data found");
+          const hashParams = new URLSearchParams(hash);
+          const accessToken = hashParams.get("access_token");
+          const refreshToken = hashParams.get("refresh_token");
+          if (!accessToken) throw new Error("No access token found");
+          const { error: error2 } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken || ""
+          });
+          if (error2) throw error2;
         }
-        const params = new URLSearchParams(hash);
-        const accessToken = params.get("access_token");
-        const refreshToken = params.get("refresh_token");
-        const expiresIn = params.get("expires_in");
-        if (!accessToken) {
-          throw new Error("No access token found");
-        }
-        await supabase.auth.setSession({
-          access_token: accessToken,
-          refresh_token: refreshToken || ""
-        });
         setStatus("¡Autenticación exitosa! Redirigiendo...");
         setTimeout(() => {
           window.location.href = "/dashboard";
-        }, 1e3);
+        }, 500);
       } catch (err) {
         const message = err instanceof Error ? err.message : "Unknown error";
         setError(message);

@@ -8,7 +8,7 @@ const GET = async ({ url, redirect }) => {
     return redirect(`/login?error=${encodeURIComponent(error_description || error)}`);
   }
   if (code) {
-    return redirect("/dashboard");
+    return redirect(`/auth/callback-client?code=${encodeURIComponent(code)}`);
   }
   return redirect("/auth/callback-client");
 };
