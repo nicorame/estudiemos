@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { DashboardClient } from '../components/DashboardClient';
+---
+
+<Layout title="Dashboard">
+  <DashboardClient client:load />
+</Layout>
+
+<style>
+  :global(body) {
+    background-color: var(--background);
+  }
+</style>

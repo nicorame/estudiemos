@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Inicio">
+  <div class="container">
+    <header>
+      <h1>Bienvenido a Estudiemos</h1>
+      <p>Tu plataforma de aprendizaje personalizada</p>
+    </header>
+
+    <section class="features">
+      <h2>Características</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>📚 Cursos</h3>
+          <p>Accede a una amplia variedad de cursos diseñados para ti</p>
+        </div>
+        <div class="feature-card">
+          <h3>🤖 IA Personalizada</h3>
+          <p>Tutorías inteligentes con Claude para ayudarte en tu aprendizaje</p>
+        </div>
+        <div class="feature-card">
+          <h3>📊 Progreso</h3>
+          <p>Sigue tu progreso y logros en tiempo real</p>
+        </div>
+        <div class="feature-card">
+          <h3>👥 Comunidad</h3>
+          <p>Conecta con otros estudiantes y comparte experiencias</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>¿Listo para comenzar?</h2>
+      <button onclick="window.location.href='/signup'">Crear cuenta</button>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  header p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+  }
+
+  .features {
+    margin-bottom: 3rem;
+  }
+
+  .features h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .cta {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0.5rem;
+  }
+
+  .cta h2 {
+    margin-bottom: 1rem;
+  }
+
+  .cta button {
+    background-color: white;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+
+  .cta button:hover {
+    background-color: var(--background);
+  }
+</style>

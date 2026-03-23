@@ -1,0 +1,28 @@
+{
+  "name": "estudiemos",
+  "version": "1.0.0",
+  "description": "Plataforma de aprendizaje para estudiantes",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@supabase/supabase-js": "^2.39.0",
+    "@anthropic-ai/sdk": "^0.14.0"
+  },
+  "devDependencies": {
+    "astro": "^4.2.0",
+    "typescript": "^5.3.3",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@astrojs/react": "^3.0.7"
+  },
+  "keywords": ["estudiantes", "plataforma", "educacion"],
+  "author": "",
+  "license": "MIT"
+}
