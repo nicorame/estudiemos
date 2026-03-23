@@ -10,19 +10,24 @@
     "astro": "astro"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@anthropic-ai/sdk": "^0.14.0",
+    "@astrojs/vercel": "^8.2.11",
     "@supabase/supabase-js": "^2.39.0",
-    "@anthropic-ai/sdk": "^0.14.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "astro": "^4.2.0",
-    "typescript": "^5.3.3",
+    "@astrojs/react": "^4.4.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
-    "@astrojs/react": "^3.0.7"
+    "astro": "^5.18.1",
+    "typescript": "^5.3.3"
   },
-  "keywords": ["estudiantes", "plataforma", "educacion"],
+  "keywords": [
+    "estudiantes",
+    "plataforma",
+    "educacion"
+  ],
   "author": "",
   "license": "MIT"
 }
