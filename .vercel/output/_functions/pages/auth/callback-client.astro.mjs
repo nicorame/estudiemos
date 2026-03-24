@@ -3,7 +3,7 @@ import 'piccolore';
 import { $ as $$Layout } from '../../chunks/Layout_Dc6lGpzd.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import { useState, useEffect } from 'react';
-import { s as supabase } from '../../chunks/supabase_D69ZckBj.mjs';
+import { s as supabase } from '../../chunks/supabase_Css712tW.mjs';
 export { renderers } from '../../renderers.mjs';
 
 function CallbackHandler() {

@@ -248,10 +248,11 @@ export function PomodoroSection({ userId }: Props) {
       return;
     }
 
+    const isRoomOwner = room.owner_id === userId;
     setRoomId(room.id);
     setInviteCode(room.invite_code);
-    setIsOwner(false);
-    isOwnerRef.current = false;
+    setIsOwner(isRoomOwner);
+    isOwnerRef.current = isRoomOwner;
     setWorkMin(room.duration_minutes);
     setBreakMin(room.break_minutes);
     workMinRef.current = room.duration_minutes;
@@ -315,7 +316,20 @@ export function PomodoroSection({ userId }: Props) {
         // fallback a clipboard
       }
     }
-    await navigator.clipboard.writeText(text);
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // fallback para cuando el documento no tiene foco
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   }

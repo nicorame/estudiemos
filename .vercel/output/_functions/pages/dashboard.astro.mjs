@@ -5,7 +5,7 @@ import 'clsx';
 /* empty css                                     */
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import { useState, useEffect, useRef } from 'react';
-import { s as supabase } from '../chunks/supabase_D69ZckBj.mjs';
+import { s as supabase } from '../chunks/supabase_Css712tW.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Astro = createAstro();
@@ -341,10 +341,11 @@ function PomodoroSection({ userId }) {
       setJoiningRoom(false);
       return;
     }
+    const isRoomOwner = room.owner_id === userId;
     setRoomId(room.id);
     setInviteCode(room.invite_code);
-    setIsOwner(false);
-    isOwnerRef.current = false;
+    setIsOwner(isRoomOwner);
+    isOwnerRef.current = isRoomOwner;
     setWorkMin(room.duration_minutes);
     setBreakMin(room.break_minutes);
     workMinRef.current = room.duration_minutes;
@@ -399,7 +400,19 @@ ${url}`;
       } catch {
       }
     }
-    await navigator.clipboard.writeText(text);
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   }

@@ -1,7 +1,7 @@
 import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_y1XpGNYX.mjs';
 import 'piccolore';
 import { $ as $$Layout } from '../chunks/Layout_Dc6lGpzd.mjs';
-import { G as GoogleAuthButton } from '../chunks/GoogleAuthButton_BnymmiXZ.mjs';
+import { G as GoogleAuthButton } from '../chunks/GoogleAuthButton_35bLSAeZ.mjs';
 /* empty css                                  */
 export { renderers } from '../renderers.mjs';
 
